@@ -18,7 +18,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" >
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/default_appbar" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:inputType="textMultiLine"
                 android:textSize="16dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
