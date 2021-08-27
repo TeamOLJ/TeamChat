@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.teamolj.teamochat.databinding.ActivityMainBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -68,7 +70,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.btnSend.setOnClickListener {
-            val newChat = ChatData(userName, binding.editChat.text.toString().trim())
+            val timeNow = SimpleDateFormat("MM/dd HH:mm", Locale.getDefault()).format(Date())
+            val newChat = ChatData(userName, timeNow, binding.editChat.text.toString().trim())
             dbRef.child("message").push().setValue(newChat)
             binding.editChat.setText("")
         }

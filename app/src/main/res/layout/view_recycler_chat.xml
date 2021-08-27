@@ -20,6 +20,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/txtChatTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="발송시각"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        app:layout_constraintStart_toEndOf="@+id/txtChatOwner"
+        app:layout_constraintTop_toTopOf="@+id/txtChatOwner"
+        app:layout_constraintBottom_toBottomOf="@+id/txtChatOwner" />
+
+    <TextView
         android:id="@+id/txtChatContext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
