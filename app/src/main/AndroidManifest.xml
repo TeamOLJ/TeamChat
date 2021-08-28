@@ -39,6 +39,7 @@
         </activity>
 
         <activity android:name=".MainActivity" />
+        <activity android:name=".NotificationActivity" />
 
         <service
             android:name=".MyFirebaseMessagingService"
