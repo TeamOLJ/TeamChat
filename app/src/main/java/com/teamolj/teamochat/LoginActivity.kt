@@ -3,16 +3,20 @@ package com.teamolj.teamochat
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.teamolj.teamochat.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity()  {
     private lateinit var binding: ActivityLoginBinding
+    private val TAG = "로그인화면"
 
     private lateinit var auth: FirebaseAuth
 
@@ -44,6 +48,19 @@ class LoginActivity : AppCompatActivity()  {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             App.prefs.setString("userID", userId)
+
+                            // 토큰 생성(없을 경우) 및 가져오기(있을 경우) 함수
+                            FirebaseMessaging.getInstance().token.addOnCompleteListener(
+                                OnCompleteListener { task ->
+                                if (!task.isSuccessful) {
+                                    Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                                    return@OnCompleteListener
+                                }
+
+                                // Get new FCM registration token
+                                val token = task.result
+                                Log.d(TAG, "FCM registration Token: $token")
+                            })
 
                             val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
