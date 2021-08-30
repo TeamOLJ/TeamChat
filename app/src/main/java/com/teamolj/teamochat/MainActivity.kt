@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // notification으로부터 시작된 경우, NotificationActivity 인텐트를 띄움
-        if (intent.extras != null) {
+        if (intent.getStringExtra("isNotification") == "true") {
             val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)
         }
