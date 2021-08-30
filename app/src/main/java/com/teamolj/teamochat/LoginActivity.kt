@@ -29,9 +29,16 @@ class LoginActivity : AppCompatActivity()  {
 
         val currentUser = auth.currentUser
         if(currentUser != null){
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            // https://firebase.google.com/docs/cloud-messaging/android/receive?authuser=2#handling_messages
+            // background 상태에서 수신한 FCM의 data payload는 런처 인텐트의 extra로 들어온다는 점 활용
+            // 애초에 서버에서 notification이 아닌 data message를 보내면 되는 문제지만, 콘솔에서는 notification이 필수로 들어가는 탓에...
+            val check = intent.extras
+
+            val mainIntent = Intent(this, MainActivity::class.java)
+            mainIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            if (check != null)
+                mainIntent.putExtra("isNotification", check)
+            startActivity(mainIntent)
         }
 
         binding.btnLogin.setOnClickListener {

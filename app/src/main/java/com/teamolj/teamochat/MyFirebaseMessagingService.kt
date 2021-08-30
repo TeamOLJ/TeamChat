@@ -20,8 +20,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.d(TAG, "Refreshed token: $token")
     }
 
-    // Foreground에서만 작동하는 것 같은데...
-    // Background 수신 메시지 클릭 시에도 기본 앱 런처 말고 다른 activity를 열려면 어떻게 해야 하지?
+    // Foreground에서만 작동
+    // Background 수신 메시지 클릭 시의 처리는 LoginActivity에서 확인 (data payload 활용)
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
 
