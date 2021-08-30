@@ -55,14 +55,14 @@ class LoginActivity : AppCompatActivity()  {
 
                             // 토큰 생성(없을 경우) 및 가져오기(있을 경우) 함수
                             FirebaseMessaging.getInstance().token.addOnCompleteListener(
-                                OnCompleteListener { task ->
-                                if (!task.isSuccessful) {
-                                    Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                                OnCompleteListener { _task ->
+                                if (!_task.isSuccessful) {
+                                    Log.w(TAG, "Fetching FCM registration token failed", _task.exception)
                                     return@OnCompleteListener
                                 }
 
                                 // Get new FCM registration token
-                                val token = task.result
+                                val token = _task.result
                                 Log.d(TAG, "FCM registration Token: $token")
                             })
 
